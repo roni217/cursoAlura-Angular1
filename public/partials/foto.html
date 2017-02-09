@@ -8,28 +8,43 @@
 	<div class="col-md-6">
 		<div class="form-group">
 			<label>Título</label>
-			<input ng-model="foto.titulo" name="titulo" class="form-control" required ng-maxlength="20">
-			<span ng-show="formulario.$submitted && formulario.titulo.$error.required" class="form-control alert-danger">
+			<input name="titulo" class="form-control" ng-model="foto.titulo" required>  
+
+			<span ng-show = "formulario.$submitted && formulario.titulo.$error.required"
+				class="form-control alert-danger">
 				Título obrigatório
 			</span>
-			<span ng-show="formulario.$submitted && formulario.titulo.$error.maxlength" class="form-control alert-danger">
-				Deve ter no máximo 20.
+			<span ng-show="formulario.$submitted && formulario.titulo.$error.maxlength" 
+				class="form-control alert-danger">
+				No máximo 20 caracteres!
 			</span>
 		</div>
 		<div class="form-group">
-			  <label>URL</label>
-            <input name="url" class="form-control" 
-            ng-model="foto.url" required>
+			<label>URL</label>
+			<input name="url" class="form-control" ng-model="foto.url" required>
 
-            <span ng-show = "formulario.$submitted && formulario.url.$error.required" 
-                class="form-control alert-danger">
-                URL obrigatória
-            </span> 
+			<span ng-show = "formulario.$submitted && formulario.url.$error.required" 
+				class="form-control alert-danger">
+				URL obrigatória
+			</span> 
 		</div>
 		<div class="form-group">
 			<label>Descrição</label>
-			<textarea ng-model="foto.descricao" name="descricao" class="form-control">
+			<textarea name="descricao" class="form-control" ng-model="foto.descricao">
 			</textarea>
+		</div>
+
+		<div class="form-group">
+			<label>Grupo</label>
+			<select name="grupo" ng-model="foto.grupo" class="form-control" 
+					required ng-controller="GruposController" 
+					ng-options="grupo._id as (grupo.nome | uppercase) for grupo in grupos">
+				<option value="">Escolha um grupo</option>
+			</select>
+			<span ng-show="formulario.$submitted && formulario.grupo.$error.required" 
+				class="form-control alert-danger">
+				Grupo obrigatório
+			</span>
 		</div>
 
 		<button type="submit" class="btn btn-primary" ng-disabled="formulario.$invalid">
@@ -39,6 +54,6 @@
 		<hr>
 	</div>
 	<div class="col-md-6">
-		<img url="{{foto.url}}" titulo="{{foto.titulo}}"></img>
+		<minha-foto url="{{foto.url}}" titulo="{{foto.titulo}}"></minha-foto>
 	</div>
 </form>
